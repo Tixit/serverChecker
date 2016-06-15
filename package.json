@@ -1,0 +1,15 @@
+{
+    "name": "serverWatcher",
+    "version": "0.0.1",
+    "description": "Watchers an http server and sends and email if it can't reach the server",
+    "repository":"",
+    "license":"UNLICENSED",
+    "private": true,
+    "readme":"",
+    "main": "watcher.js",
+    "dependencies": {
+        "fibers":"1",
+        "nodemailer":"2",
+        "proto":"1",
+    }
+}
