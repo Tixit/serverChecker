@@ -10,6 +10,6 @@
     "dependencies": {
         "fibers":"1",
         "nodemailer":"2",
-        "proto":"1",
+        "proto":"1"
     }
 }
