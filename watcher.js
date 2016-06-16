@@ -75,7 +75,7 @@ module.exports = proto(function(){
 
 //            console.log("notifying about "+this.name+": "+recipients)
             if(recipients.length > 0) {
-                var errorMessage = "Couldn't reach "+this.name+' at '+this.host+":"+this.port
+                var errorMessage = "Couldn't reach "+this.name+' at '+this.host+":"+this.port+' for the last '+this.unreachableCount+' tries.'
                 notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
             }
         }
