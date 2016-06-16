@@ -1,6 +1,6 @@
 {
     "name": "serverChecker",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Watchers an http server and sends and email if it can't reach the server",
     "repository":"",
     "license":"UNLICENSED",
