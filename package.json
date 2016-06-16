@@ -1,6 +1,6 @@
 {
     "name": "serverChecker",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Watchers an http server and sends and email if it can't reach the server",
     "repository":"",
     "license":"UNLICENSED",
@@ -10,6 +10,7 @@
     "dependencies": {
         "fibers":"1",
         "nodemailer":"2",
-        "proto":"1"
+        "proto":"1",
+        "moment":"*"
     }
 }

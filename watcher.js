@@ -6,6 +6,7 @@ var https = require('https')
 var nodemailer = require('nodemailer')
 var Future = require("fibers/future")
 var proto = require("proto")
+var moment = require("moment-timezone")
 
 module.exports = proto(function(){
 
@@ -75,8 +76,12 @@ module.exports = proto(function(){
 
 //            console.log("notifying about "+this.name+": "+recipients)
             if(recipients.length > 0) {
-                var errorMessage = "Couldn't reach "+this.name+' at '+this.host+":"+this.port+' for the last '+this.unreachableCount+' tries.'
-                notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
+                var errorMessage = moment().tz("America/Los_Angeles").format('YYYY-MM-DD HH:mm:ss')+' PST, tries: '+this.unreachableCount+"\n"
+                                   +"Couldn't reach "+this.name+' at '+this.host+":"+this.port
+                                   +' during the last '+this.unreachableCount+' tries.'
+
+                console.log(recipients+' '+errorMessage)
+                //notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
             }
         }
     }
