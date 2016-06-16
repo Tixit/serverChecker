@@ -52,8 +52,8 @@ module.exports = proto(function(){
             this.unreachableCount++
 
             var recipients = []
-            for(var email in args.errorRecipients) {
-                var info = args.errorRecipients[email]
+            for(var email in this.errorRecipients) {
+                var info = this.errorRecipients[email]
                 if(this.unreachableCount < info.maxConsecutive || this.unreachableCount%info.cooldown === 0) {
                     recipients.push(email)
                 }
