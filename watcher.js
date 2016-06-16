@@ -80,8 +80,8 @@ module.exports = proto(function(){
                                    +"Couldn't reach "+this.name+' at '+this.host+":"+this.port
                                    +' during the last '+this.unreachableCount+' tries.'
 
-                console.log(recipients+' '+errorMessage)
-                //notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
+//                console.log(recipients+' '+errorMessage)
+                notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
             }
         }
     }
