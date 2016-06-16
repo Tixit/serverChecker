@@ -89,7 +89,7 @@ module.exports = proto(function(){
 
 function notify(transportOptions, to, subject, message, error, onError) {
     try {
-        var info = sendMail(transportOptions, 'Tixit Notifier', to, subject, message+". "+error.message, message).wait()
+        var info = sendMail(transportOptions, 'Tixit Notifier', to, subject, message+" "+error.message, message).wait()
         if(info.rejected.length > 0) {
             onError(new Error("Failed to send to: "+info.rejected))
         }
