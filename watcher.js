@@ -36,8 +36,6 @@ module.exports = proto(function(){
         this.backoffNotificationMod = args.backoffNotificationMod
         this.onError = args.onError
 
-        console.log(args.path)
-
         if(args.secure) {
             this.protocol = https
         } else {
@@ -54,7 +52,7 @@ module.exports = proto(function(){
                 method: 'GET', rejectUnauthorized:false
             }).wait()
             this.unreachableCount = 0
-            console.log(this.name+' ok!')
+//            console.log(this.name+' ok!')
         } catch(e) {
             if(e.message.indexOf("ECONNREFUSED") === -1) {
                 console.log(e)
@@ -75,10 +73,10 @@ module.exports = proto(function(){
                 }
             }
 
-            console.log("notifying about "+this.name+": "+recipients)
+//            console.log("notifying about "+this.name+": "+recipients)
             if(recipients.length > 0) {
-//                var errorMessage = "Couldn't reach "+this.name+' at '+this.host+":"+this.port
-//                notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
+                var errorMessage = "Couldn't reach "+this.name+' at '+this.host+":"+this.port
+                notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
             }
         }
     }
