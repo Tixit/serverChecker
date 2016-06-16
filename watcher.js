@@ -26,6 +26,7 @@ module.exports = proto(function(){
         this.host = args.host
         this.port = args.port
         this.errorSubject = args.errorSubject
+        this.name = args.name
         this.errorRecipients = args.errorRecipients
         this.smtpTransportOptions = args.smtpTransportOptions
         this.maxConsecutiveErrorNotifications = args.maxConsecutiveErrorNotifications
@@ -60,7 +61,7 @@ module.exports = proto(function(){
             }
 
             if(recipients.length > 0) {
-                var errorMessage = "Couldn't reach "+name+' at '+this.host+":"+this.port
+                var errorMessage = "Couldn't reach "+this.name+' at '+this.host+":"+this.port
                 notify(this.smtpTransportOptions, recipients, this.errorSubject, errorMessage, e, this.onError)
             }
         }
