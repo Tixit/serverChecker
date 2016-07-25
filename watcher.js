@@ -77,7 +77,7 @@ module.exports = proto(function(){
 //            console.log("notifying about "+this.name+": "+recipients)
             if(recipients.length > 0) {
                 var errorMessage = moment().tz("America/Los_Angeles").format('YYYY-MM-DD HH:mm:ss')+' PST, tries: '+this.unreachableCount+"\n"
-                                   +"Couldn't reach "+this.name+' at '+this.host+":"+this.port
+                                   +"Couldn't reach "+this.name+' at http://'+this.host+":"+this.port
                                    +' during the last '+this.unreachableCount+' tries.'
 
 //                console.log(recipients+' '+errorMessage)
