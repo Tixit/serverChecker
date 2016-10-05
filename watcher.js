@@ -36,6 +36,7 @@ module.exports = proto(function(){
         this.maxConsecutiveErrorNotifications = args.maxConsecutiveErrorNotifications
         this.backoffNotificationMod = args.backoffNotificationMod
         this.onError = args.onError
+        this.recipientsSentToThisEpisode = {}
 
         if(args.secure) {
             this.protocol = https
@@ -52,7 +53,23 @@ module.exports = proto(function(){
                 path: this.path,
                 method: 'GET', rejectUnauthorized:false
             }).wait()
+
+            if(this.unreachableCount > 0) {
+                var message = 'Reached '+this.name+' at '+this.host+":"+this.port+' at '+
+                              moment().tz("America/Los_Angeles").format('YYYY-MM-DD HH:mm:ss')+' PST after '+this.unreachableCount+" tries!"
+
+                var recipients = []
+                for(var email in this.recipientsSentToThisEpisode) {
+                    recipients.push(recipients)
+                }
+
+                if(recipients.length > 0) { // I think this will always be true at this point
+                    notify(this.smtpTransportOptions, recipients, 'RESOLVED!! : ) '+this.errorSubject, message, e, this.onError)
+                }
+            }
+
             this.unreachableCount = 0
+            this.recipientsSentToThisEpisode = {}
 //            console.log(this.name+' ok!')
         } catch(e) {
             if(e.message.indexOf("ECONNREFUSED") === -1) {
@@ -71,13 +88,14 @@ module.exports = proto(function(){
                   &&(countAfterMin < info.maxConsecutive || countAfterMin>0 && countAfterMin%info.cooldown === 0)
                 ) {
                     recipients.push(email)
+                    this.recipientsSentToThisEpisode[email] = true
                 }
             }
 
 //            console.log("notifying about "+this.name+": "+recipients)
             if(recipients.length > 0) {
                 var errorMessage = moment().tz("America/Los_Angeles").format('YYYY-MM-DD HH:mm:ss')+' PST, tries: '+this.unreachableCount+"\n"
-                                   +"Couldn't reach "+this.name+' at http://'+this.host+":"+this.port
+                                   +"Couldn't reach "+this.name+' at '+this.host+":"+this.port
                                    +' during the last '+this.unreachableCount+' tries.'
 
 //                console.log(recipients+' '+errorMessage)
